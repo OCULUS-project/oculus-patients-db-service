@@ -12,6 +12,5 @@ data class Patient (
         val pesel: Long,
         val email: String,
         val phone: String,
-        val password: String?,
-        val metrics: String?
+        val password: String?
 )

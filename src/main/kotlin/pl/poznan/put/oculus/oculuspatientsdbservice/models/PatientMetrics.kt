@@ -6,11 +6,9 @@ import java.time.Instant
 data class PatientMetrics (
         @Id
         val id: String?,
-        val dateOfBirth: Instant?,
+        val patient: String,
+        val date: Instant,
+        val notes: String?,
         val weight: Int?,
-        val height: Int?,
-        val updatedAt: Instant?,
-        val notes: String?
-) {
-        constructor() : this(null, null, null, null, null, null)
-}
+        val height: Int?
+)
