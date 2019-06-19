@@ -3,4 +3,4 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = 'oculus-patients-db-service'
+rootProject.name = "oculus-patients-db-service"
