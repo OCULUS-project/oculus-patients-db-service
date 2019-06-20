@@ -1,4 +1,4 @@
-package pl.poznan.put.oculus.oculuspatientsdbservice.app
+package pl.poznan.put.oculus.oculuspatientsdbservice.service
 
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -8,7 +8,6 @@ import pl.poznan.put.oculus.oculuspatientsdbservice.models.PatientMetrics
 import pl.poznan.put.oculus.oculuspatientsdbservice.models.PatientMetricsBuilder
 import pl.poznan.put.oculus.oculuspatientsdbservice.repository.PatientMetricsRepository
 import pl.poznan.put.oculus.oculuspatientsdbservice.repository.PatientRepository
-import java.time.Instant
 
 @Service
 class PatientDbServiceApp (

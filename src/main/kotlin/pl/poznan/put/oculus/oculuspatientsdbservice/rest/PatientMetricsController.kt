@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import pl.poznan.put.oculus.oculuspatientsdbservice.app.PatientDbServiceApp
+import pl.poznan.put.oculus.oculuspatientsdbservice.service.PatientDbServiceApp
 import pl.poznan.put.oculus.oculuspatientsdbservice.models.PatientMetrics
 
 @RestController
