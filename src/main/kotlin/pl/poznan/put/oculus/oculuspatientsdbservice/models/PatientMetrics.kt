@@ -7,6 +7,7 @@ data class PatientMetrics (
         @Id
         val id: String?,
         val patient: String,
+        val doctor: String,
         val date: Instant,
         val notes: String?,
         val weight: Int?,
