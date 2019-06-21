@@ -21,6 +21,8 @@ repositories {
     mavenCentral()
 }
 
+val swaggerVersion = "2.9.2"
+
 dependencies {
     // spring
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
@@ -30,6 +32,10 @@ dependencies {
     // kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    // swagger / springfox
+    implementation("io.springfox:springfox-swagger2:$swaggerVersion")
+    implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
 
     //test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
