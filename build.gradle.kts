@@ -3,19 +3,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version("2.1.5.RELEASE")
     id("io.spring.dependency-management") version("1.0.7.RELEASE")
-    kotlin("jvm") version("1.2.71")
-    kotlin("plugin.spring") version("1.2.71")
+    kotlin("jvm") version("1.3.50")
+    kotlin("plugin.spring") version("1.3.50")
 }
 
 group = "pl.put.poznan.oculus"
 version = "0.0.1"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
-
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
-}
 
 repositories {
     mavenCentral()
@@ -30,8 +23,8 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     // kotlin
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation(kotlin("reflect"))
+    implementation(kotlin("stdlib-jdk8"))
 
     // swagger / springfox
     implementation("io.springfox:springfox-swagger2:$swaggerVersion")
@@ -42,12 +35,5 @@ dependencies {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
-    }
-}
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    languageVersion = "1.3"
+    kotlinOptions.jvmTarget = "1.8"
 }
