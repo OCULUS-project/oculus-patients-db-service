@@ -1,14 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version("2.1.5.RELEASE")
-    id("io.spring.dependency-management") version("1.0.7.RELEASE")
-    kotlin("jvm") version("1.2.71")
-    kotlin("plugin.spring") version("1.2.71")
+    id("org.springframework.boot") version "2.2.0.RELEASE"
+    id("io.spring.dependency-management") version "1.0.8.RELEASE"
+    kotlin("jvm") version "1.3.50"
+    kotlin("plugin.spring") version "1.3.50"
 }
 
 group = "pl.put.poznan.oculus"
-version = "0.0.1"
+version = "0.1.0"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 configurations {
@@ -19,23 +19,16 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven("https://dl.bintray.com/jakubriegel/oculus")
 }
 
-val swaggerVersion = "2.9.2"
-
 dependencies {
+    // oculus
+    implementation("pl.poznan.put.oculus.boot:oculus-spring-boot-starter:0.2.2")
+
     // spring
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-
-    // kotlin
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-    // swagger / springfox
-    implementation("io.springfox:springfox-swagger2:$swaggerVersion")
-    implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
     //test
     testImplementation("org.springframework.boot:spring-boot-starter-test")

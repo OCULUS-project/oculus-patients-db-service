@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import pl.poznan.put.oculus.oculuspatientsdbservice.config.PublicAPI
+import pl.poznan.put.oculus.boot.config.PublicAPI
 import pl.poznan.put.oculus.oculuspatientsdbservice.models.Patient
 import pl.poznan.put.oculus.oculuspatientsdbservice.service.PatientService
 import java.net.URI
