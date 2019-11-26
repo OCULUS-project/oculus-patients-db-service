@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import pl.poznan.put.oculus.oculuspatientsdbservice.config.PublicAPI
+import pl.poznan.put.oculus.boot.config.PublicAPI
 import pl.poznan.put.oculus.oculuspatientsdbservice.models.PatientMetrics
 import pl.poznan.put.oculus.oculuspatientsdbservice.service.PatientMetricsService
 
@@ -73,7 +73,7 @@ class PatientMetricsController (
     ) = ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(service.addOrUpdateMetrics(metrics))
+            .body(service.addMetrics(metrics))
 
     @PutMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     @ApiOperation(value = "update patient metrics")
@@ -85,5 +85,5 @@ class PatientMetricsController (
     ) = ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(service.addOrUpdateMetrics(metrics))
+            .body(service.updateMetrics(metrics))
 }
