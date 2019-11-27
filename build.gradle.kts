@@ -28,19 +28,11 @@ dependencies {
 
     // spring
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-
+  
     //test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
-    }
-}
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    languageVersion = "1.3"
+    kotlinOptions.jvmTarget = "1.8"
 }
