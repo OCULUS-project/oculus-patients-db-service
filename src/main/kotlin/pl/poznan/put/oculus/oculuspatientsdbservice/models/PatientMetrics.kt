@@ -14,6 +14,5 @@ data class PatientMetrics (
         val doctor: String,
         val date: Instant,
         val notes: String?,
-        val weight: Int?,
-        val height: Int?
+        val attributes: Map<String, String>
 )

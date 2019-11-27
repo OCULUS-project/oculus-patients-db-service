@@ -24,7 +24,7 @@ repositories {
 
 dependencies {
     // oculus
-    implementation("pl.poznan.put.oculus.boot:oculus-spring-boot-starter:0.2.2")
+    implementation("pl.poznan.put.oculus.boot:oculus-spring-boot-starter:0.2.3")
 
     // spring
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
