@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import pl.poznan.put.oculus.boot.config.PublicAPI
 import pl.poznan.put.oculus.oculuspatientsdbservice.models.PatientMetrics
+import pl.poznan.put.oculus.oculuspatientsdbservice.rest.model.PatientMetricsModel
+import pl.poznan.put.oculus.oculuspatientsdbservice.rest.model.toModel
 import pl.poznan.put.oculus.oculuspatientsdbservice.service.PatientMetricsService
 
+@CrossOrigin
 @RestController
 @RequestMapping("patients/metrics")
 @PublicAPI
@@ -33,8 +37,8 @@ class PatientMetricsController (
     ])
     fun getMetricsByPatient(
             @RequestParam @ApiParam(value = "id of patient to get metrics for", required = true) patientId: String
-    ): ResponseEntity<List<PatientMetrics>> {
-        val metrics = service.getMetricsByPatient(patientId)
+    ): ResponseEntity<List<PatientMetricsModel>> {
+        val metrics = service.getMetricsByPatient(patientId).map { it.toModel() }
         return if (metrics.isNotEmpty()) ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
@@ -52,12 +56,12 @@ class PatientMetricsController (
     ])
     fun getMetricsById(
             @RequestParam @ApiParam(value = "id of patient metrics to retrieve", required = true) id: String
-    ): ResponseEntity<PatientMetrics> {
+    ): ResponseEntity<PatientMetricsModel> {
         val metrics = service.getMetricsById(id)
         return if (metrics != null) ResponseEntity
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(metrics)
+                .body(metrics.toModel())
         else ResponseEntity
                 .noContent()
                 .build()
@@ -70,10 +74,10 @@ class PatientMetricsController (
     ])
     fun addMetrics(
             @RequestBody @ApiParam(value = "desired patient metrics data", required = true) metrics: PatientMetrics
-    ) = ResponseEntity
+    ): ResponseEntity<PatientMetricsModel> = ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(service.addMetrics(metrics))
+            .body(service.addMetrics(metrics).toModel())
 
     @PutMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     @ApiOperation(value = "update patient metrics")
@@ -82,8 +86,8 @@ class PatientMetricsController (
     ])
     fun updateMetrics(
             @RequestBody @ApiParam(value = "updated patient metrics", required = true) metrics: PatientMetrics
-    ) = ResponseEntity
+    ): ResponseEntity<PatientMetricsModel> = ResponseEntity
             .ok()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(service.updateMetrics(metrics))
+            .body(service.updateMetrics(metrics).toModel())
 }
