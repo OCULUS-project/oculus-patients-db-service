@@ -3,6 +3,7 @@ package pl.poznan.put.oculus.oculuspatientsdbservice.service
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.hateoas.IanaLinkRelations
 import org.springframework.hateoas.Link
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -36,10 +37,13 @@ class PatientMetricsService (
             "http://${factsServiceHost}/$ATTRIBUTES_VALIDATION_URL",
             AttributesValidationRequest(attributes),
             AttributesValidationResponse::class.java
-    ) .let {
-        when (it.statusCode) {
+    ) .let { response ->
+        logger.info("validated attributes with status ${response.statusCode}")
+        when (response.statusCode) {
             HttpStatus.OK -> Unit
-            HttpStatus.UNPROCESSABLE_ENTITY -> throw InvalidAttributesException(it.body!!._links["self"]?.href ?: "")
+            HttpStatus.UNPROCESSABLE_ENTITY -> throw InvalidAttributesException(
+                    response.body!!.links.first { it.rel == IanaLinkRelations.SELF }.href ?: ""
+            )
             else -> throw Exception("validation unsuccessful")
         }
     }
@@ -48,7 +52,7 @@ class PatientMetricsService (
 
         private const val ATTRIBUTES_VALIDATION_URL = "/facts/attributes/validate"
         private data class AttributesValidationRequest (val attributes: Map<String, String>)
-        private data class AttributesValidationResponse (val _links: Map<String, Link>)
+        private data class AttributesValidationResponse (val links: List<Link>)
         class InvalidAttributesException (
                 private val validation: String
         ) : OculusException("Given attributes don't meet requirements") {

@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -22,7 +21,6 @@ import pl.poznan.put.oculus.oculuspatientsdbservice.rest.model.toModel
 import pl.poznan.put.oculus.oculuspatientsdbservice.service.PatientService
 import java.net.URI
 
-@CrossOrigin
 @RestController
 @RequestMapping("patients")
 @PublicAPI
